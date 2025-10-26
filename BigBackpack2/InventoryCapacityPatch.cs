@@ -10,13 +10,6 @@ namespace BigBackpack2
     [HarmonyPatch(typeof(CharacterMainControl))]
     public static class InventoryCapacityPatch
     {
-        // 将通知逻辑提取为协程方法
-        private static System.Collections.IEnumerator DelayedNotification( int addCount)
-        {
-            yield return new WaitForSeconds(1f); // 延迟1秒
-      
-        }
-        
         [HarmonyPatch("InventoryCapacity", MethodType.Getter)]
         [HarmonyPostfix]
         public static void PostfixInventoryCapacity(CharacterMainControl __instance, ref float __result)
@@ -28,7 +21,6 @@ namespace BigBackpack2
                 {
                     __result += ModBehaviour.InventoryCapacityIncrease;
                     // 检查玩家背包大小是否超过背包内物品量
-
                     var backpackItems = __instance.CharacterItem.Inventory.Content;
                     if (backpackItems != null && backpackItems.Count > __result)
                     {
@@ -45,6 +37,7 @@ namespace BigBackpack2
                                 addCount += 1;
                             }
                         }
+
                         if (addCount > 0)
                         {
                             try
@@ -56,7 +49,6 @@ namespace BigBackpack2
                                 Debug.Log($"BigBackpack2模组：错误：{e.Message}");
                             }
                         }
-                        
                     }
                 }
             }

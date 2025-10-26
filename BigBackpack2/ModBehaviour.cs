@@ -15,30 +15,30 @@ namespace BigBackpack2
 
         protected override void OnAfterSetup()
         {
-            Debug.Log("BigBackpack2模组：OnAfterSetup方法被调用");
+            // Debug.Log("BigBackpack2模组：OnAfterSetup方法被调用");
             LoadConfig();
             if (_harmony != null)
             {
-                Debug.Log("BigBackpack2模组：已修补 先卸载");
+                // Debug.Log("BigBackpack2模组：已修补 先卸载");
                 _harmony.UnpatchAll();
             }
 
-            Debug.Log("BigBackpack2模组：执行修补");
+            // Debug.Log("BigBackpack2模组：执行修补");
             _harmony = new Harmony("Lexcellent.BigBackpack2");
             _harmony.PatchAll(Assembly.GetExecutingAssembly());
-            Debug.Log("BigBackpack2模组：修补完成");
+            // Debug.Log("BigBackpack2模组：修补完成");
         }
 
         protected override void OnBeforeDeactivate()
         {
-            Debug.Log("BigBackpack2模组：OnBeforeDeactivate方法被调用");
-            Debug.Log("BigBackpack2模组：执行取消修补");
+            // Debug.Log("BigBackpack2模组：OnBeforeDeactivate方法被调用");
+            // Debug.Log("BigBackpack2模组：执行取消修补");
             if (_harmony != null)
             {
                 _harmony.UnpatchAll();
             }
 
-            Debug.Log("BigBackpack2模组：执行取消修补完毕");
+            // Debug.Log("BigBackpack2模组：执行取消修补完毕");
         }
 
         private void LoadConfig()
